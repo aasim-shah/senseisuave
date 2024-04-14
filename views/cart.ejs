@@ -1,0 +1,57 @@
+<%- include('partials/header', { title: 'Your Cart' }) %>
+
+<div class="py-12">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="bg-white overflow-hidden shadow sm:rounded-lg">
+            <div class="px-4 py-5 sm:px-6">
+                <h2 class="text-lg leading-6 font-medium text-gray-900">
+                    Shopping Cart
+                </h2>
+            </div>
+            <div class="border-t border-gray-200">
+                <% if (cart && cart.length > 0) { %>
+                    <% cart.forEach(function(item) { %>
+                        <div class="flex items-center px-4 py-5 sm:px-6">
+                            <div class="min-w-0 flex-1 sm:flex sm:items-center sm:justify-between">
+                                <div class="truncate">
+                                    <div class="flex text-sm">
+                                        <p class="font-medium text-cyan-600 truncate">
+                                            <%= item.product.title %>
+                                        </p>
+                                        <p class="ml-1 flex-shrink-0 font-normal text-gray-500">
+                                            $<%= item.product.price %>
+                                        </p>
+                                    </div>
+                                    <div class="mt-2 flex">
+                                        <p class="flex items-center text-sm text-gray-500">
+                                            Quantity: <%= item.quantity %>
+                                        </p>
+                                    </div>
+                                </div>
+                                <img class="h-10 w-10 rounded-full" src="<%= item.product.imageUrl %>" alt="">
+                            </div>
+                            <div>
+                                <a href="/cart/delete/<%= item.product._id %>" class="ml-4 bg-white text-cyan-600 hover:text-cyan-900">
+                                    Remove
+                                </a>
+                            </div>
+                        </div>
+                    <% }); %>
+                    <div class="px-4 py-4 sm:px-6">
+                        <a href="/cart/shippment" class="bg-cyan-800 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded">
+                            Checkout
+                        </a>
+                    </div>
+                <% } else { %>
+                    <div class="px-4 py-5 sm:px-6 text-center">
+                        <p class="text-sm font-medium text-gray-900">
+                            Your cart is empty.
+                        </p>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer') %>
